@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparsh Mehta - Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #ffffff;
+            --accent-color: #3b82f6;
+            --light-bg: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
+            padding: 2rem;
+        }
+
+        .resume-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-item h3, .education-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-item h4, .education-item h4 {
+            color: var(--accent-color);
+            font-weight: normal;
+            margin-bottom: 0.25rem;
+        }
+
+        .date {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .publications-list {
+            list-style: none;
+        }
+
+        .publication-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .print-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                padding: 2rem;
+            }
+
+            .print-btn {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .resume-container {
+                padding: 1.5rem;
+            }
+
+            .contact-info {
+                gap: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <h1>Sparsh Mehta</h1>
+            <h2>Data Scientist & AI Expert</h2>
+            <div class="contact-info">
+                <a href="mailto:sipsmehta@gmail.com"><i class="fas fa-envelope"></i> sipsmehta@gmail.com</a>
+                <a href="tel:+919518194406"><i class="fas fa-phone"></i> +91 9518194406</a>
+                <a href="https://linkedin.com/in/sparsh-mehta" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/sipsmehta" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru, India</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p>Data Scientist and AI expert with extensive experience in developing and implementing machine learning solutions. Specialized in computer vision, natural language processing, and deep learning applications. Proven track record of leading successful AI projects and publishing research in prestigious journals.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h3>Data Scientist</h3>
+                <h4>Great Learning</h4>
+                <p class="date">January 2025 - Present</p>
+                <ul>
+                    <li>Spearheaded the development of cutting-edge AI projects</li>
+                    <li>Utilized data science techniques to streamline manual processes</li>
+                    <li>Implemented innovative solutions for Modern Gen AI projects</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Data Analyst</h3>
+                <h4>Scaler</h4>
+                <p class="date">June 2023 - January 2025</p>
+                <ul>
+                    <li>Engineered and deployed a natural language-to-SQL chatbot</li>
+                    <li>Analyzed 1M+ customer interactions</li>
+                    <li>Developed automated reporting pipelines</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Prism Research Intern</h3>
+                <h4>Samsung India</h4>
+                <p class="date">February 2023 - October 2023</p>
+                <ul>
+                    <li>Developed advanced computer vision models</li>
+                    <li>Optimized model inference time by 35%</li>
+                    <li>Presented research findings to C-level executives</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>ML/DL</h3>
+                    <p>Statistical ML, Deep Learning, Generative AI, CNN, RNN, GAN, Transformers, RLHF</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <p>Python, R, SQL, TensorFlow, PyTorch, Scikit-learn, Pandas, NumPy</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <p>Langchain, Llama-index, AWS, Google Cloud, MLOps, Hadoop, Spark</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Publications</h2>
+            <ul class="publications-list">
+                <li class="publication-item">
+                    <strong>Performance Evaluation of Novel Deep-Learning Based Method for Diabetic Foot Ulcers</strong>
+                    <p>Taylor & Francis Group · 2024</p>
+                    <p>Accuracy: 92.8% in classification, 90.5% in detection</p>
+                </li>
+                <li class="publication-item">
+                    <strong>Precision Agriculture: CNN Model-Based Approach for Crop Diseases</strong>
+                    <p>O'Reilly · 2024</p>
+                    <p>Accuracy: 96.85-99.3% using CNN with Digital Twin</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>Bachelor of Technology - BTech</h3>
+                <h4>Chandigarh University</h4>
+                <p class="date">2020 - 2024</p>
+                <p>Computer Science and Business Systems powered by T.C.S</p>
+                <p>Achievement: Innovator of the Year 2023</p>
+            </div>
+        </section>
+    </div>
+
+    <button onclick="window.print()" class="print-btn">
+        <i class="fas fa-print"></i> Print Resume
+    </button>
+</body>
+</html> 
