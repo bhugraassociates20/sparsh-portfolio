@@ -34,6 +34,7 @@ Plain **HTML + CSS + vanilla JS**. No build step, no framework, no bundler — o
 | Concern | Approach |
 |---|---|
 | Layout | CSS Grid / Flexbox, `clamp()` type scale, custom-property design tokens |
+| Responsive | Fluid `1fr` cells throughout; bordered card blocks step between column counts that divide their item counts, borderless text grids use `auto-fit` |
 | Theming | One token set re-mapped by `.band--dark` for the dark hero and contact bands |
 | Type | Inter + JetBrains Mono (Google Fonts) |
 | Icons | Font Awesome 6 (CDN) |
@@ -95,6 +96,38 @@ python -m http.server 8000
 - Diagrams carry descriptive `role="img"` + `aria-label` text, and wide content
   scrolls inside its own container so the page never scrolls sideways.
 - A print stylesheet strips the nav, form, and all decoration.
+
+## Responsive behaviour
+
+Two different strategies, on purpose.
+
+**Borderless text grids** (`.case__narrative`, `.skills-layout`) use
+`repeat(auto-fit, minmax(...))` and reflow continuously. A short last row is
+invisible without a frame around it.
+
+**Bordered card blocks** (`.stats`, `.awards`, `.mini-grid`, `.pat-list`,
+`.impact`) hold a fixed number of items, so they step between column counts
+that *divide* those counts — otherwise the leftover cells sit enclosed inside
+the border as visible gaps (8 awards across 5 columns leaves two blanks in a
+bordered box). Cells still stretch with `1fr` between the steps, so resizing
+feels continuous.
+
+| Grid | Items | Column steps |
+|---|---|---|
+| `.stats` | 4 | 4 → 2 (≤820) → 1 (≤470) |
+| `.awards` | 8 | 4 → 2 (≤820) → 1 (≤470) |
+| `.mini-grid` | 9 | 3 → 1 (≤760) |
+| `.pat-list` | 4 | 2 → 4 (≤940, once patents stack) → 2 (≤760) → 1 (≤470) |
+| `.impact` | 3 | 3 → 1 (≤560) |
+
+Hairlines are drawn **per cell** (`box-shadow` top + left, outermost pair
+clipped by the container) rather than by a `1px` gap over a line-coloured
+background. With the gap technique any empty cell renders as a solid block of
+line colour; per-cell hairlines mean an empty cell renders as nothing, so
+adding or removing an item degrades gracefully instead of producing a grey
+slab.
+
+**If you add or remove items in one of those grids, revisit its column steps.**
 
 ## Editing guide
 
