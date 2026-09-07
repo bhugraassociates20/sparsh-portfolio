@@ -1,1 +1,1 @@
-# sparsh-tech-portfolio
+# sparsh-portfolio
