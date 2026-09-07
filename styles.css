@@ -696,7 +696,7 @@ section[id], header[id] { scroll-margin-top: 72px; }
 .impact__v {
     font-family: var(--font-mono);
     /* These values are short phrases, not just numbers, so they have to be
-       allowed to wrap - "Peer reviewed" and "Explainable" were being clipped. */
+       allowed to wrap - "Published" and "Explainable" were being clipped. */
     font-size: clamp(1rem, 2.2vw, 1.15rem);
     font-weight: 600;
     letter-spacing: -.03em;

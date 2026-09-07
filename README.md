@@ -20,7 +20,7 @@ by a hand-authored SVG architecture diagram and a measured impact readout.
 | Selected work | Five case studies, each with an architecture diagram |
 | More work | Nine further projects in a compact grid |
 | Experience | Timeline, with earlier roles behind a collapsible fold |
-| Research | Four peer-reviewed publications (IEEE, Wiley, Taylor & Francis, O'Reilly) |
+| Research | Four book chapters & conference papers (IEEE, Wiley, Taylor & Francis, O'Reilly) |
 | Patents | Five filings — one featured, four compact |
 | Recognition | Eight competition placements and awards |
 | Tech stack | GenAI & agentic, automation & no-code, ML, engineering, analytics |
