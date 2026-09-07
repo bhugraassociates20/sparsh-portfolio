@@ -279,53 +279,82 @@
     var EMAILJS_KEY      = 'B2GoeB6Vd2wHCHrA9';
     var EMAILJS_SERVICE  = 'service_gabi5g9';
     var EMAILJS_TEMPLATE = 'template_70852i7';
+    var CONTACT_EMAIL    = 'sipsmehta@gmail.com';
 
     var form = document.getElementById('contact-form');
     var note = document.getElementById('formNote');
+    var noteIdle = note ? note.textContent : '';
 
-    if (form && typeof emailjs !== 'undefined') {
-        emailjs.init(EMAILJS_KEY);
+    if (form) {
+        var hasEmailJS = typeof emailjs !== 'undefined';
+        if (hasEmailJS) emailjs.init(EMAILJS_KEY);
 
         form.addEventListener('submit', function (e) {
+            // Always prevent the native submit. Without a handler the form
+            // would post to itself and blank the page.
             e.preventDefault();
 
             var btn = form.querySelector('button[type="submit"]');
             var idle = btn.innerHTML;
-            var noteIdle = note ? note.textContent : '';
+            var data = readForm();
 
-            // Native validation, surfaced through the note line.
             if (!form.checkValidity()) {
-                if (note) note.textContent = 'Please fill in every field with a valid email.';
+                setNote('Please fill in every field with a valid email.');
+                return;
+            }
+
+            if (!hasEmailJS) {
+                // Script blocked or offline - hand off immediately.
+                offerMailto(data, 'Mail service unavailable.');
                 return;
             }
 
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
-            if (note) note.textContent = '';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending&hellip;';
+            setNote('');
 
-            emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
-                from_name:  form.querySelector('[name="from_name"]').value,
-                from_email: form.querySelector('[name="from_email"]').value,
-                message:    form.querySelector('[name="message"]').value
-            }).then(function () {
+            emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, data).then(function () {
                 btn.innerHTML = '<i class="fas fa-check"></i> Message sent';
                 form.reset();
-                if (note) note.textContent = 'Thanks — I\'ll get back to you shortly.';
-                restore(btn, idle, noteIdle);
+                setNote('Thanks &mdash; I&rsquo;ll get back to you shortly.');
+                restore(btn, idle);
             }, function (err) {
-                btn.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Failed to send';
-                if (note) note.textContent = 'Something went wrong. Email sipsmehta@gmail.com directly.';
+                btn.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Could not send';
+                offerMailto(data, 'Could not send from here.');
                 if (window.console) console.error('EmailJS error:', err);
-                restore(btn, idle, noteIdle);
+                restore(btn, idle);
             });
         });
     }
 
-    function restore(btn, idle, noteIdle) {
+    function readForm() {
+        return {
+            from_name:  form.querySelector('[name="from_name"]').value,
+            from_email: form.querySelector('[name="from_email"]').value,
+            message:    form.querySelector('[name="message"]').value
+        };
+    }
+
+    function setNote(html) {
+        if (note) note.innerHTML = html;
+    }
+
+    // Fallback path: build a mailto with the message already composed, so a
+    // visitor never loses what they typed just because the form backend is down.
+    function offerMailto(data, reason) {
+        if (!note) return;
+        var subject = 'Portfolio enquiry from ' + (data.from_name || 'a visitor');
+        var body = data.message + '\n\n--\n' + data.from_name + '\n' + data.from_email;
+        var href = 'mailto:' + CONTACT_EMAIL +
+                   '?subject=' + encodeURIComponent(subject) +
+                   '&body=' + encodeURIComponent(body);
+        note.innerHTML = reason + ' <a href="' + href + '">Send it by email instead &rarr;</a>';
+    }
+
+    function restore(btn, idle) {
         window.setTimeout(function () {
             btn.disabled = false;
             btn.innerHTML = idle;
-            if (note) note.textContent = noteIdle;
-        }, 4000);
+        }, 5000);
     }
 })();

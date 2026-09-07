@@ -146,7 +146,31 @@ Common changes and where they live:
   light-band accent.
 - **Recolour** — every colour is a custom property in `:root` and `.band--dark`
   at the top of `styles.css`; `--accent` is the single accent hue.
-- **EmailJS keys** are the three constants at the bottom of `script.js`.
+- **EmailJS keys** are the four constants at the bottom of `script.js`
+  (`EMAILJS_KEY`, `EMAILJS_SERVICE`, `EMAILJS_TEMPLATE`, `CONTACT_EMAIL`).
+
+## Contact form troubleshooting
+
+The form posts through EmailJS. If it stops sending, check the API directly
+before touching any code — the error message names the exact cause:
+
+```bash
+curl -s -X POST https://api.emailjs.com/api/v1.0/email/send   -H "Content-Type: application/json"   -d '{"service_id":"service_gabi5g9","template_id":"template_70852i7","user_id":"B2GoeB6Vd2wHCHrA9"}'
+```
+
+| Response | Meaning |
+|---|---|
+| `The Public Key is invalid` | `EMAILJS_KEY` is wrong |
+| `The service ID not found` | `EMAILJS_SERVICE` is wrong |
+| `The template ID not found` | `EMAILJS_TEMPLATE` is wrong |
+| `Gmail_API: Invalid grant. Please reconnect your Gmail account` | Credentials are all fine — the linked Gmail OAuth grant expired. Reconnect the service at [dashboard.emailjs.com/admin](https://dashboard.emailjs.com/admin) → Email Services → Gmail → Reconnect |
+
+Swapping a real ID for a nonsense one narrows it down without sending anything:
+validation runs before delivery, so a `400` proves the *other* IDs are good.
+
+The form fails safe. If EmailJS rejects the send, or its script never loads,
+the submit handler still runs and offers a `mailto:` link with the subject and
+message already composed, so a visitor's message is never simply lost.
 
 ## Contact
 
